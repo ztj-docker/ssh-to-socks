@@ -7,10 +7,11 @@ ENV PORT=22
 ENV USER=root
 ENV PASS=123456
 
-RUN apk add --no-cache sshpass openssh-client
+ADD ./entrypoint.sh /bin/entrypoint.sh
 
-ADD entrypoint.sh /usr/bin/entrypoint.sh
+RUN apk add --no-cache sshpass openssh-client
+RUN chmod +x /bin/entrypoint.sh
 
 EXPOSE 1080
 
-CMD ["entrypoint.sh"]
+CMD ["/bin/entrypoint.sh"]
